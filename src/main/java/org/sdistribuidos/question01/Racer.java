@@ -2,21 +2,18 @@ package org.sdistribuidos.question01;
 
 public class Racer implements Runnable {
     private int id;
-    private int repetitions;
+    private final int repetitions = 1000;
     private int delay;
 
-    public Racer(int id, int repetitions, int delay) {
+    public Racer(int id, int delay) {
         this.id = id;
-        this.repetitions = repetitions;
         this.delay = delay;
     }
 
     @Override
     public void run() {
-        int count = 0;
-        while (count < repetitions) {
+        for (int count = 0; count < repetitions; count++) {
             System.out.println("Racer " + id + " - imprimindo (" + count + ")");
-            count++;
 
             try {
                 Thread.sleep(delay);
