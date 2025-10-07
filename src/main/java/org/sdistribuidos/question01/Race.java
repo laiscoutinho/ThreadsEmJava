@@ -16,6 +16,13 @@ public class Race {
                     ? new RacerThread(i, repetitions, delay)
                     : new Thread(new Racer(i, repetitions, delay));
 
+            // Definição de prioridade: 1 a 5 baixa, 6 a 10 alta
+            if (i <= 5) {
+                t.setPriority(Thread.MIN_PRIORITY); // menor prioridade
+            } else {
+                t.setPriority(Thread.MAX_PRIORITY); // maior prioridade
+            }
+
             racers.add(t);
         }
 
