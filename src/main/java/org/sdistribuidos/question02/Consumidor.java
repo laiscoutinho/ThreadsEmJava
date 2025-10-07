@@ -13,8 +13,20 @@ public class Consumidor extends Thread {
     public void run() {
         int consumido = 0;
         while (consumido < 20) {
-            deposito.retirar();
-            consumido++;
+            // verifica se há itens disponíveis antes de tentar retirar
+            if (deposito.getNumItens() > 0) {
+                deposito.retirar();
+                consumido++;
+            } else {
+                // se o depósito estiver vazio, aguarda 200 ms antes de tentar novamente
+                System.out.println(getName() + " aguardando 200 ms — depósito vazio.");
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException e) {
