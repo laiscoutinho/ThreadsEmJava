@@ -9,8 +9,12 @@ public class Deposito {
     }
 
     public synchronized boolean retirar() {
-        items = getNumItens() - 1;
-        return true;
+        if (items > 0) {
+            items = getNumItens() - 1;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public synchronized boolean colocar() {
