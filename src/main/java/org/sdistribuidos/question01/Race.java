@@ -6,13 +6,15 @@ import java.util.List;
 public class Race {
     public static void main(String[] args) {
         List<Thread> racers = new ArrayList<>();
-        int repetitions = 3;
 
         // Criação de 10 racers (identificadores 1 a 10)
         for (int i = 1; i <= 10; i++) {
+            int repetitions = 3;
+            int delay = (int) (Math.random() * 200);
+
             Thread t = (i % 2 == 0)
-                    ? new RacerThread(i, repetitions)
-                    : new Thread(new Racer(i, repetitions));
+                    ? new RacerThread(i, repetitions, delay)
+                    : new Thread(new Racer(i, repetitions, delay));
 
             racers.add(t);
         }
@@ -34,3 +36,4 @@ public class Race {
         System.out.println("=== Corrida finalizada ===");
     }
 }
+
